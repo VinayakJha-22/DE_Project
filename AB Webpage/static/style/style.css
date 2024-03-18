@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero-section{
+    position: relative;
+}
+
+.banner-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.cover-menu{
+    position: absolute;
+    top: 20vh;
+    left: 20%;
+    width: 60%;
+    height: 60vh;
+    background: rgba(0, 0, 0, 0.658);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.part-A{
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(10, 68, 95);
+}
+
+.part-a-font{
+    font-size: 2rem;
+    color: rgb(221, 20, 120);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.part-a-font-b{
+    color: rgb(130, 193, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.part-a-font-a{
+    color: rgb(255, 255, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.part-a-font-c{
+    color: rgb(250, 190, 80);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.part-B{
+    height: 100%;
+    background-color: rgb(10, 68, 95);
+    border-radius:  0 16px 16px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.part-b-font{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.buy-now{
+    padding: 7px 20px;
+    border: none;
+    cursor: pointer;
+    color: rgb(221, 20, 120);
+    transition: 0.3s ease all;
+}
+
+.buy-now:hover{
+    padding: 7px 30px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(221, 20, 120);
+}
+
+.product-page{
+    position: absolute;
+    top: 100vh;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+}
