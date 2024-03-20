@@ -2,11 +2,17 @@ from google.cloud import bigquery
 import pandas_gbq
 import pandas as pd
 import json
+import configparser
+
+config = configparser.ConfigParser()
+config.read('cred/config.ini')
+json_key_path = config.get('DEFAULT', 'JSON_KEY')
+
 
 try:
-    bq_client = bigquery.Client.from_service_account_json('cred/cred.json')
-except:
-    print("Not able to create client object")
+    bq_client = bigquery.Client.from_service_account_json(json_key_path)
+except Exception as e:
+    print(f"Not able to create client object {e}")
 
 class Read_avro_data:
     def read_data_from_external_table():
