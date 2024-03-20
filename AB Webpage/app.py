@@ -2,9 +2,14 @@ from flask import Flask, render_template, request
 from google.cloud import pubsub_v1
 import json
 import logging
+import configparser
+
+config = configparser.ConfigParser()
+config.read('cred/config.ini')
+json_key_path = config.get('DEFAULT', 'JSON_KEY')
 
 app = Flask(__name__)
-publisher = pubsub_v1.PublisherClient.from_service_account_json('cred/cred.json')
+publisher = pubsub_v1.PublisherClient.from_service_account_json(json_key_path)
 
 @app.route('/index_A')
 def index_A():
