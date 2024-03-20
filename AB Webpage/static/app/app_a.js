@@ -56,11 +56,11 @@ const capture_date = `${year}-${month}-${day}`;
 
 
 window.addEventListener('beforeunload', function(event) {
-  data = {
+  serve_data = {
     'page': page,
     'visit_id': visit_id,
     'event_auth': event_auth,
-    'event_buynow': event_buy_now,
+    'event_buy_now': event_buy_now,
     'event_buy': event_buy,
     'event_buy_three': event_buy_three,
     'event_buy_six': event_buy_six,
@@ -68,6 +68,19 @@ window.addEventListener('beforeunload', function(event) {
     'event_location': event_location,
     'capture_date': capture_date
   }
+  fetch('/publish', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(serve_data),
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);  // Log response from Flask route
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 
-  const api_serve_data = JSON.stringify(data);
 });
