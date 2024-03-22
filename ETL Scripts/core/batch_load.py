@@ -13,7 +13,7 @@ class Read_avro_data:
             self.json_key_path = config.get('DEFAULT', 'JSON_KEY')
             self.bq_client = bigquery.Client.from_service_account_json(self.json_key_path)
         except Exception as e:
-            print(f"Not able to create client object {e}")
+            print(f"Info : Not able to create client object :{e}")
     
     def read_data_from_external_table(self):
 
