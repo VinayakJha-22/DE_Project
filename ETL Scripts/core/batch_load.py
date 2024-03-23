@@ -4,6 +4,7 @@ import pandas as pd
 import json
 import configparser
 from datetime import datetime, timedelta
+import pytz
 
 class Read_avro_data:
     def __init__(self):
@@ -28,9 +29,11 @@ class Read_avro_data:
         return batch_data_df
     
     def filter_batch_data(self, dataframe):
-        current_date = datetime.now()
+        ist_timezone = pytz.timezone('Asia/Kolkata')
+        current_date = datetime.now(ist_timezone)
         batch_format_date = current_date - timedelta(days=1)
         batch_date = batch_format_date.strftime('%Y-%m-%d')
+        print(f"Info : Data Processed for batch {batch_date}")
         dataframe['capture_date'] = pd.to_datetime(dataframe['capture_date'])
         batch_data = dataframe[(dataframe['capture_date'] == batch_date)]
         return batch_data
