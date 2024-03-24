@@ -8,7 +8,7 @@ if __name__ == "__main__":
     # load config data 
     try:
         config = configparser.ConfigParser()
-        config.read('cred/config.ini')
+        config.read('/home/airflow/gcs/data/ETL Scripts/cred/config.ini')
         table_id = config.get('GCP', 'BATCH_TABLE')
         dataset_id = config.get('GCP', 'DATASET_ID')
         stream_bucket =  config.get('GCP', 'STREAM_BUCKET')
