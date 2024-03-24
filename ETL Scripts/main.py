@@ -1,5 +1,6 @@
 from core.batch_load import Read_avro_data
 from core.gcs_archive import Archive_storage
+import pandas as pd
 import configparser
 
 if __name__ == "__main__":
@@ -18,12 +19,19 @@ if __name__ == "__main__":
     batch_Obj = Read_avro_data()
     extracted_avro_data = batch_Obj.read_data_from_external_table()
     print("Info : Avro Data : ", extracted_avro_data)
-    batch_data = batch_Obj.filter_batch_data(extracted_avro_data)
-    print("Info : Batch Data :", batch_data)
-    status = batch_Obj.upload_to_bigquery(batch_data, dataset_id, table_id)
-    print(status)
-
-    # archival process of files from bucket 
-    gcs_Obj = Archive_storage()
-    gcs_Obj.move_to_archive(stream_bucket, archive_bucket)
-    print("Info : Data Archival is done")
+    if extracted_avro_data.empty:
+        print("Info : No Avro Data, Exit without Execution")
+    else :
+        batch_data = batch_Obj.filter_batch_data(extracted_avro_data)
+        print("Info : Batch Data :", batch_data)
+        if batch_data.empty:
+            print("Info : No data to load for current batch")
+        
+        else:
+            status = batch_Obj.upload_to_bigquery(batch_data, dataset_id, table_id)
+            print(status)
+            # archival process of files from bucket 
+            gcs_Obj = Archive_storage()
+            gcs_Obj.move_to_archive(stream_bucket, archive_bucket)
+            print("Info : Data Archival is done")
+        
