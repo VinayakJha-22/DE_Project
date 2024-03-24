@@ -2,19 +2,17 @@ from google.cloud import bigquery
 import pandas_gbq
 import pandas as pd
 import json
-import configparser
 from datetime import datetime, timedelta
 import pytz
+from . import logger
 
 class Read_avro_data:
     def __init__(self):
         try:
-            config = configparser.ConfigParser()
-            config.read('./cred/config.ini')
-            self.json_key_path = config.get('DEFAULT', 'JSON_KEY')
-            self.bq_client = bigquery.Client.from_service_account_json(self.json_key_path)
+            self.bq_client = bigquery.Client()
         except Exception as e:
             print(f"Info : Not able to create client object :{e}")
+            logger.log_text(f"Client Object could not be created : {e}")
     
     def read_data_from_external_table(self):
 
@@ -34,6 +32,7 @@ class Read_avro_data:
         batch_format_date = current_date - timedelta(days=1)
         batch_date = batch_format_date.strftime('%Y-%m-%d')
         print(f"Info : Data Processed for batch {batch_date}")
+        logger.log_text(f"Info : Data Processed for batch {batch_date}")
         dataframe['capture_date'] = pd.to_datetime(dataframe['capture_date'])
         batch_data = dataframe[(dataframe['capture_date'] == batch_date)]
         return batch_data
@@ -56,9 +55,11 @@ class Read_avro_data:
         errors = self.bq_client.insert_rows_json(table_ref, rows_to_insert)
         if errors:
             print(f'Encountered errors while inserting rows: {errors}')
+            logger.log_text(f'Encountered errors while inserting rows: {errors}')
             return f"Error Occured {errors}"
         else:
-            print('All rows successfully inserted into BigQuery table.')
+            print('Info : All rows successfully inserted into BigQuery table.')
+            logger.log_text('Info : All rows successfully inserted into BigQuery table.')
             return "Batch Data Loaded Successully!"
         
     
