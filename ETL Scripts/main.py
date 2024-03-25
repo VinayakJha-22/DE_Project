@@ -31,8 +31,8 @@ if __name__ == "__main__":
             print("Info : No data to load for current batch")
             logger.log_text("Info : No data to load for current batch")
         else:
-            status = batch_Obj.upload_to_bigquery(batch_data, dataset_id, table_id)
-            print(status)
+            # status = batch_Obj.upload_to_bigquery(batch_data, dataset_id, table_id)
+            # print(status)
             # archival process of files from bucket 
             gcs_Obj = Archive_storage()
             gcs_Obj.move_to_archive(stream_bucket, archive_bucket)
