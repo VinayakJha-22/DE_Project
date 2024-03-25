@@ -9,6 +9,7 @@ var event_location = ''
 
 document.getElementById('buy-now-b').addEventListener('click', function() {
     document.getElementById('product-b').scrollIntoView({ behavior: 'smooth' });
+    event_buy_now = true
   });
 
   document.getElementById('buy-now-3').addEventListener('click', function() {
