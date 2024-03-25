@@ -16,7 +16,7 @@ dag = DAG(
     'etl_batch_dag',
     default_args=default_args,
     description='DAG to execute ETL batch job daily',
-    schedule_interval='0 0 * * *',  # Execute at midnight every day
+    schedule_interval='0 11 * * *', 
     start_date=days_ago(1),
     tags=['etl', 'batch']
 )

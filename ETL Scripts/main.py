@@ -8,7 +8,7 @@ if __name__ == "__main__":
     # load config data 
     try:
         config = configparser.ConfigParser()
-        config.read('/home/airflow/gcs/data/ETL Scripts/cred/config.ini')
+        config.read('cred/config.ini')
         table_id = config.get('GCP', 'BATCH_TABLE')
         dataset_id = config.get('GCP', 'DATASET_ID')
         stream_bucket =  config.get('GCP', 'STREAM_BUCKET')
@@ -31,8 +31,8 @@ if __name__ == "__main__":
             print("Info : No data to load for current batch")
             logger.log_text("Info : No data to load for current batch")
         else:
-            status = batch_Obj.upload_to_bigquery(batch_data, dataset_id, table_id)
-            print(status)
+            # status = batch_Obj.upload_to_bigquery(batch_data, dataset_id, table_id)
+            # print(status)
             # archival process of files from bucket 
             gcs_Obj = Archive_storage()
             gcs_Obj.move_to_archive(stream_bucket, archive_bucket)
