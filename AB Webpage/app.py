@@ -23,7 +23,7 @@ def index_B():
 def publish_to_pubsub():
     try:
         data = request.json  # Assuming JSON data is sent in the request
-        topic_path = 'projects/theindianfolklore/topics/straming-A-B'
+        topic_path = 'YOUR_TOPIC_PATH'
 
         # Convert data to JSON string
         message_data = json.dumps(data)
